@@ -1,0 +1,51 @@
+# ============================================================
+# AI Research & Monitoring Agent — example configuration
+# Personalise the profile, feeds, pages, and topics for your
+# own field. Anything that fails is skipped, never crashes.
+# ============================================================
+
+model: "claude-haiku-4-5-20251001"
+max_tokens: 3000
+lookback_hours: 26
+
+# The agent ranks everything against this profile.
+profile: |
+  Example: a final-year computer science student in Finland interested in
+  cybersecurity and AI governance, tracking industry news, regulatory
+  developments (EU AI Act, NIS2, GDPR), and junior job openings at a
+  shortlist of target companies. Wants FILTERING, not volume: max 5 news
+  items per day, only what genuinely matters, each with a one-line
+  "why this matters for you".
+
+# Personal milestone reminders — surfaced 60/30/7 days ahead.
+key_dates:
+  - date: "2026-09-01"
+    note: "Example: autumn semester registration deadline."
+  - date: "2027-01-15"
+    note: "Example: application window opens."
+
+feeds:
+  - name: "Krebs on Security"
+    url: "https://krebsonsecurity.com/feed/"
+  - name: "Schneier on Security"
+    url: "https://www.schneier.com/feed/atom/"
+  - name: "ENISA News"
+    url: "https://www.enisa.europa.eu/rss.xml"
+  - name: "NIST Cybersecurity Insights"
+    url: "https://www.nist.gov/blogs/cybersecurity-insights/rss.xml"
+  - name: "The Record"
+    url: "https://therecord.media/feed"
+
+# Pages to watch for changes (e.g. careers pages). The agent stores a
+# text fingerprint per page; on change, the new text goes to the LLM
+# to identify anything relevant to the profile.
+careers_pages:
+  - name: "Example Company Careers"
+    url: "https://example.com/careers"
+
+# One rotating 5-minute micro-lesson per day, cycling in order.
+learning_topics:
+  - "CIA triad — definitions and one real-world failure example of each"
+  - "Risk terminology: threat, vulnerability, likelihood, impact"
+  - "Zero trust architecture — core principles"
+  - "EU AI Act: the four risk tiers with one example system each"
