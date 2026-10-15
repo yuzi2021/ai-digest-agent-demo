@@ -2,6 +2,12 @@ name: Daily Digest
 
 on:
   workflow_dispatch: {}
+  schedule:
+    - cron: "0 5 * * *"   # 05:00 UTC daily (08:00 Helsinki in summer)
+
+concurrency:
+  group: daily-digest
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -9,6 +15,7 @@ permissions:
 jobs:
   digest:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
